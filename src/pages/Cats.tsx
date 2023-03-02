@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import axios from 'axios';
 
 const Cats = () => {
@@ -39,72 +39,34 @@ const Cats = () => {
     }
   };
 
-  // const panResponder = useRef(
-  //   PanResponder.create({
-  //     onStartShouldSetPanResponder: () => true,
-  //     onPanResponderMove: (evt, gestureState) => {
-  //       position.setValue({x: gestureState.dx, y: gestureState.dy});
-  //       if (gestureState.dx > 120) {
-  //         setSwipeDirection('right');
-  //       } else if (gestureState.dx < -120) {
-  //         setSwipeDirection('left');
-  //       } else {
-  //         setSwipeDirection(null);
-  //       }
-  //     },
-  //     onPanResponderRelease: (evt, gestureState) => {
-  //       if (gestureState.dx > 120) {
-  //         voteCat(1); // Vote yes if swiped right
-  //         setLikedImages([...likedImages, catImage.id]); // Add image id to liked images
-  //         setSwipeDirection(null);
-  //       } else if (gestureState.dx < -120) {
-  //         voteCat(0); // Vote no if swiped left
-  //         setDislikedImages([...dislikedImages, catImage.id]); // Add image id to disliked images
-  //         setSwipeDirection(null);
-  //       } else {
-  //         Animated.spring(position, {
-  //           toValue: {x: 0, y: 0},
-  //           useNativeDriver: true,
-  //         }).start();
-  //       }
-  //     },
-  //   }),
-  // ).current;
-
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Fire</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Superlike</Text>
-        </TouchableOpacity>
+      <View style={styles.topContainer}>
+        <Image
+          style={styles.topImage}
+          source={require('../assets/images/top-bar.png')}
+        />
       </View>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{uri: catImage.url}} />
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={[styles.button, styles.likeButton]}
-          onPress={() => voteCat(1)}>
-          <Text style={styles.buttonText}>Like</Text>
+        <TouchableOpacity onPress={() => voteCat(-1)}>
+          <Image
+            style={styles.likeButton}
+            source={require('../assets/images/unmatch-btn.png')}
+          />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, styles.dislikeButton]}
-          onPress={() => voteCat(0)}>
-          <Text style={styles.buttonText}>Dislike</Text>
+        <TouchableOpacity onPress={() => voteCat(1)}>
+          <Image
+            style={styles.likeButton}
+            source={require('../assets/images/match-btn.png')}
+          />
         </TouchableOpacity>
       </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>View Likes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Comment</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Profile</Text>
+      <View style={styles.footerContainer}>
+        <TouchableOpacity>
+          <Image source={require('../assets/images/nav-bar.png')} />
         </TouchableOpacity>
       </View>
     </View>
@@ -113,16 +75,24 @@ const Cats = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 500,
     flex: 1,
-    padding: 20,
+    padding: 16,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  topContainer: {
+    marginTop: 40,
+    marginBottom: 20,
+  },
+  topImage: {
+    width: 84,
+    height: 28,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginTop: 40,
+    marginBottom: 40,
   },
   button: {
     backgroundColor: '#3498db',
@@ -143,14 +113,16 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 200,
-    resizeMode: 'cover',
     borderRadius: 20,
   },
   likeButton: {
-    backgroundColor: '#27ae60',
+    width: 55,
+    height: 55,
   },
-  dislikeButton: {
-    backgroundColor: '#c0392b',
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
 

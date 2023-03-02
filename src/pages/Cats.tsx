@@ -1,11 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+  Text,
+} from 'react-native';
 import axios from 'axios';
 
 const Cats = () => {
   const [catImage, setCatImage] = useState({
     id: '2bbSbBC-v',
     url: 'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg',
+    breeds: [
+      {
+        name: 'Abyssinian',
+        id: '2bbSbBC-v',
+      },
+    ],
   });
 
   useEffect(() => {
@@ -48,7 +61,13 @@ const Cats = () => {
         />
       </View>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{uri: catImage.url}} />
+        <ImageBackground style={styles.image} source={{uri: catImage?.url}}>
+          <View style={styles.imageTextContainer}>
+            <Text style={styles.imageText}>
+              {catImage?.breeds[0]?.name || catImage?.breeds[0]?.id}
+            </Text>
+          </View>
+        </ImageBackground>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => voteCat(-1)}>
@@ -114,6 +133,25 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderRadius: 20,
+  },
+  imageTextContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  imageText: {
+    color: '#000000',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    padding: 10,
+    width: '80%',
+    backgroundColor: '#ffffff',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   likeButton: {
     width: 55,

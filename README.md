@@ -1,4 +1,4 @@
-# Tincer tech test
+# Tinder tech test
 
 # Installing
 

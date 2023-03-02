@@ -3,7 +3,7 @@
 # Installing
 
 ```
-npm install (pod-install need for ios)
+npm install (pod-install needed for ios)
 ```
 
 # Running (iOS)
@@ -21,7 +21,7 @@ npm run android
 # Tests (jest)
 
 ```
-npm run test --coverage
+npm run test
 ```
 
 # Brief

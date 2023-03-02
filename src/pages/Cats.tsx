@@ -56,6 +56,7 @@ const Cats = () => {
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Image
+          testID="cat-image"
           style={styles.topImage}
           source={require('../assets/images/top-bar.png')}
         />
@@ -74,12 +75,14 @@ const Cats = () => {
           <Image
             style={styles.likeButton}
             source={require('../assets/images/unmatch-btn.png')}
+            testID="unlike-button"
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => voteCat(1)}>
           <Image
             style={styles.likeButton}
             source={require('../assets/images/match-btn.png')}
+            testID="like-button"
           />
         </TouchableOpacity>
       </View>
